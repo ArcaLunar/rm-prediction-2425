@@ -15,7 +15,7 @@ find_package(spdlog REQUIRED)
 
 # 添加依赖
 target_link_libraries(auto_aim
-    spdlog::spdlog # Pre-compiled library, see https://github.com/gabime/spdlog/blob/v1.x/example/CMakeLists.txt
+    spdlog::spdlog # apt 安装的预编译的 spdlog 库, 见 https://github.com/gabime/spdlog/blob/v1.x/example/CMakeLists.txt
 )
 
 # 设置输出路径
