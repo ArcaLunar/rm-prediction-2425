@@ -1,9 +1,9 @@
 CMakeFiles/auto_aim.dir/src/Main.cpp.o: \
  /home/arca/Documents/codebases/Prediction2425/src/Main.cpp \
- /usr/include/stdc-predef.h /usr/include/spdlog/spdlog.h \
- /usr/include/spdlog/common.h /usr/include/spdlog/tweakme.h \
- /usr/include/spdlog/details/null_mutex.h /usr/include/c++/13/atomic \
- /usr/include/c++/13/bits/atomic_base.h \
+ /usr/include/stdc-predef.h /usr/include/spdlog/sinks/basic_file_sink.h \
+ /usr/include/spdlog/details/file_helper.h /usr/include/spdlog/common.h \
+ /usr/include/spdlog/tweakme.h /usr/include/spdlog/details/null_mutex.h \
+ /usr/include/c++/13/atomic /usr/include/c++/13/bits/atomic_base.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -177,6 +177,10 @@ CMakeFiles/auto_aim.dir/src/Main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
  /usr/include/x86_64-linux-gnu/bits/iscanonical.h /usr/include/fmt/core.h \
+ /usr/include/spdlog/sinks/base_sink.h \
+ /usr/include/spdlog/details/log_msg.h /usr/include/spdlog/sinks/sink.h \
+ /usr/include/spdlog/formatter.h \
+ /usr/include/spdlog/details/synchronous_factory.h \
  /usr/include/spdlog/details/registry.h \
  /usr/include/spdlog/details/periodic_worker.h \
  /usr/include/c++/13/condition_variable \
@@ -189,13 +193,11 @@ CMakeFiles/auto_aim.dir/src/Main.cpp.o: \
  /usr/include/c++/13/bits/hashtable.h \
  /usr/include/c++/13/bits/hashtable_policy.h \
  /usr/include/c++/13/bits/enable_special_members.h \
- /usr/include/c++/13/bits/erase_if.h /usr/include/spdlog/logger.h \
- /usr/include/spdlog/details/log_msg.h \
- /usr/include/spdlog/details/backtracer.h \
+ /usr/include/c++/13/bits/erase_if.h /usr/include/spdlog/spdlog.h \
+ /usr/include/spdlog/logger.h /usr/include/spdlog/details/backtracer.h \
  /usr/include/spdlog/details/log_msg_buffer.h \
  /usr/include/spdlog/details/circular_q.h /usr/include/c++/13/vector \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/cassert \
- /usr/include/assert.h /usr/include/spdlog/version.h \
- /usr/include/spdlog/details/synchronous_factory.h
+ /usr/include/assert.h /usr/include/spdlog/version.h
