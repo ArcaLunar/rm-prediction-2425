@@ -13,6 +13,7 @@
 #define __POSE_SOLVER_HPP__
 
 #include <Eigen/Core>
+#include <Eigen/Dense>
 
 /**
  * @brief 计算旋转矩阵
@@ -20,7 +21,9 @@
  */
 class RotationManager {
   public:
-    using RotMat_t = Eigen::Matrix<double, 3, 3>;
+    using RotMat_t     = Eigen::Matrix<double, 3, 3>;
+    using Queternion_t = Eigen::Quaternion<double>;
+
     /**
      * @brief 绕 X 轴旋转 theta 弧度的旋转矩阵
      *
@@ -44,6 +47,14 @@ class RotationManager {
      * @return RotMat_t 旋转矩阵
      */
     static RotMat_t GetRotMat_by_Z_Axis(double theta);
+
+    /**
+     * @brief 旋转矩阵转四元数
+     * 
+     * @param rot_mat 
+     * @return Queternion_t 
+     */
+    static Queternion_t RotMat2Queternion(const RotMat_t &rot_mat);
 };
 
 #endif

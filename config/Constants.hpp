@@ -12,4 +12,7 @@
 #ifndef __CONSTANTS_HPP__
 #define __CONSTANTS_HPP__
 
+// true = 打印调试信息
+#define DEBUG true
+
 #endif
