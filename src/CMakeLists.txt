@@ -20,8 +20,7 @@ add_executable(test Test.cpp)
 
 # 链接所有库
 target_link_libraries(auto_aim
-    Calibration
-    Capture
+    Camera
     Communication
     Filter
     Pose
@@ -33,8 +32,7 @@ target_link_libraries(auto_aim
 )
 
 target_link_libraries(test
-    Calibration
-    Capture
+    Camera
     Communication
     Filter
     Pose

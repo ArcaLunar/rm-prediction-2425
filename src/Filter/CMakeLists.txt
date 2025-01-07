@@ -2,15 +2,9 @@
 cmake_minimum_required(VERSION 3.10)
 project(Filter)
 
-# 添加源文件和头文件
-set(FILTER_SOURCES 
-    KalmanFilter.cpp
-    UnscentedKalmanFilter.cpp
-)
-set(FILTER_HEADERS 
-    KalmanFilter.hpp 
-    UnscentedKalmanFilter.hpp
-)
+add_subdirectory(KF)
+add_subdirectory(EKF)
+add_subdirectory(UKF)
 
-# 添加库
-add_library(Filter ${FILTER_SOURCES} ${FILTER_HEADERS})
+add_library(Filter INTERFACE)
+target_link_libraries(Filter INTERFACE KF EKF UKF)
