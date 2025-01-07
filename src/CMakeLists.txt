@@ -18,6 +18,7 @@ add_executable(auto_aim Main.cpp)
 # 添加测试程序
 add_executable(test Test.cpp)
 
+
 # 链接所有库
 target_link_libraries(auto_aim
     Camera

@@ -14,3 +14,7 @@ add_library(Capture ${CAPTURE_SRC} ${CAPTURE_HEADERS})
 
 # 链接 OpenCV 库
 target_link_libraries(Capture ${OpenCV_LIBS})
+
+target_include_directories(Capture PUBLIC 
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)

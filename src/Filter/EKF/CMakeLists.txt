@@ -12,3 +12,5 @@ add_library(EKF
     ${EKF_SRC}
     ${EKF_HEADER}
 )
+
+target_include_directories(EKF PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

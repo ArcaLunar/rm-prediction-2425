@@ -11,7 +11,7 @@
  * @tparam X_N 状态变量维度
  */
 template <int Z_N, int X_N>
-class KalmanFilter {
+class KalmanFilter  {
   public:
     using MatXX = Eigen::Matrix<double, X_N, X_N>;
     using MatXZ = Eigen::Matrix<double, X_N, Z_N>;
@@ -75,7 +75,7 @@ class KalmanFilter {
      * @param cur_time 当前时刻
      * @return VecX 当前时刻下对当前状态的估计
      */
-    VecX Update(const VecZ &z_k, const double &cur_time);
+    VecX Correct(const VecZ &z_k, const double &cur_time);
 };
 
 #endif

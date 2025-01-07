@@ -2,7 +2,7 @@
 
 template <int Z_N, int X_N>
 typename KalmanFilter<Z_N, X_N>::VecX
-KalmanFilter<Z_N, X_N>::Update(const VecZ &z_k, const double &cur_time) {
+KalmanFilter<Z_N, X_N>::Correct(const VecZ &z_k, const double &cur_time) {
     // 设置时间项
     for (int i = 1; i < X_N; i++) A(i - 1, i) = cur_time - last_time;
     last_time = cur_time;

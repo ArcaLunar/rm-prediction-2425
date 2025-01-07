@@ -12,3 +12,5 @@ add_library(UKF
     ${UKF_SRC}
     ${UKF_HEADER}
 )
+
+target_include_directories(UKF PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

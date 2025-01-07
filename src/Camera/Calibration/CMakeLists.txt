@@ -18,3 +18,8 @@ target_link_libraries(Calibration
     ${OpenCV_LIBS}
     spdlog::spdlog
 )
+
+# 使得 Calibration 可被所有文件包含
+target_include_directories(Calibration PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)

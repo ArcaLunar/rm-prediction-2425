@@ -5,5 +5,11 @@ project(Camera)
 add_subdirectory(Capture) # 捕获图像
 add_subdirectory(Calibration) # 相机标定
 
+include_directories(
+    Capture
+    Calibration
+)
+
 add_library(Camera INTERFACE)
+
 target_link_libraries(Camera INTERFACE Capture Calibration)
