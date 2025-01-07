@@ -1,0 +1,2 @@
+/usr/bin/ar qc libFilter.a CMakeFiles/Filter.dir/KalmanFilter.cpp.o CMakeFiles/Filter.dir/UnscentedKalmanFilter.cpp.o
+/usr/bin/ranlib libFilter.a

@@ -117,6 +117,32 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named uninstall
+
+# Build rule for target.
+uninstall: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uninstall
+.PHONY : uninstall
+
+# fast build rule for target.
+uninstall/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/uninstall.dir/build.make src/CMakeFiles/uninstall.dir/build
+.PHONY : uninstall/fast
+
+#=============================================================================
+# Target rules for targets named AutoAim_uninstall
+
+# Build rule for target.
+AutoAim_uninstall: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AutoAim_uninstall
+.PHONY : AutoAim_uninstall
+
+# fast build rule for target.
+AutoAim_uninstall/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/AutoAim_uninstall.dir/build.make src/CMakeFiles/AutoAim_uninstall.dir/build
+.PHONY : AutoAim_uninstall/fast
+
+#=============================================================================
 # Target rules for targets named auto_aim
 
 # Build rule for target.
@@ -126,32 +152,99 @@ auto_aim: cmake_check_build_system
 
 # fast build rule for target.
 auto_aim/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/auto_aim.dir/build.make CMakeFiles/auto_aim.dir/build
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/auto_aim.dir/build.make src/CMakeFiles/auto_aim.dir/build
 .PHONY : auto_aim/fast
 
-src/Main.o: src/Main.cpp.o
-.PHONY : src/Main.o
+#=============================================================================
+# Target rules for targets named test
 
-# target to build an object file
-src/Main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/auto_aim.dir/build.make CMakeFiles/auto_aim.dir/src/Main.cpp.o
-.PHONY : src/Main.cpp.o
+# Build rule for target.
+test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
+.PHONY : test
 
-src/Main.i: src/Main.cpp.i
-.PHONY : src/Main.i
+# fast build rule for target.
+test/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/test.dir/build.make src/CMakeFiles/test.dir/build
+.PHONY : test/fast
 
-# target to preprocess a source file
-src/Main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/auto_aim.dir/build.make CMakeFiles/auto_aim.dir/src/Main.cpp.i
-.PHONY : src/Main.cpp.i
+#=============================================================================
+# Target rules for targets named Capture
 
-src/Main.s: src/Main.cpp.s
-.PHONY : src/Main.s
+# Build rule for target.
+Capture: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Capture
+.PHONY : Capture
 
-# target to generate assembly for a file
-src/Main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/auto_aim.dir/build.make CMakeFiles/auto_aim.dir/src/Main.cpp.s
-.PHONY : src/Main.cpp.s
+# fast build rule for target.
+Capture/fast:
+	$(MAKE) $(MAKESILENT) -f src/Camera/Capture/CMakeFiles/Capture.dir/build.make src/Camera/Capture/CMakeFiles/Capture.dir/build
+.PHONY : Capture/fast
+
+#=============================================================================
+# Target rules for targets named Calibration
+
+# Build rule for target.
+Calibration: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Calibration
+.PHONY : Calibration
+
+# fast build rule for target.
+Calibration/fast:
+	$(MAKE) $(MAKESILENT) -f src/Camera/Calibration/CMakeFiles/Calibration.dir/build.make src/Camera/Calibration/CMakeFiles/Calibration.dir/build
+.PHONY : Calibration/fast
+
+#=============================================================================
+# Target rules for targets named Communication
+
+# Build rule for target.
+Communication: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Communication
+.PHONY : Communication
+
+# fast build rule for target.
+Communication/fast:
+	$(MAKE) $(MAKESILENT) -f src/Communication/CMakeFiles/Communication.dir/build.make src/Communication/CMakeFiles/Communication.dir/build
+.PHONY : Communication/fast
+
+#=============================================================================
+# Target rules for targets named Filter
+
+# Build rule for target.
+Filter: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Filter
+.PHONY : Filter
+
+# fast build rule for target.
+Filter/fast:
+	$(MAKE) $(MAKESILENT) -f src/Filter/CMakeFiles/Filter.dir/build.make src/Filter/CMakeFiles/Filter.dir/build
+.PHONY : Filter/fast
+
+#=============================================================================
+# Target rules for targets named Pose
+
+# Build rule for target.
+Pose: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Pose
+.PHONY : Pose
+
+# fast build rule for target.
+Pose/fast:
+	$(MAKE) $(MAKESILENT) -f src/Pose/CMakeFiles/Pose.dir/build.make src/Pose/CMakeFiles/Pose.dir/build
+.PHONY : Pose/fast
+
+#=============================================================================
+# Target rules for targets named Settings
+
+# Build rule for target.
+Settings: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Settings
+.PHONY : Settings
+
+# fast build rule for target.
+Settings/fast:
+	$(MAKE) $(MAKESILENT) -f src/Settings/CMakeFiles/Settings.dir/build.make src/Settings/CMakeFiles/Settings.dir/build
+.PHONY : Settings/fast
 
 # Help Target
 help:
@@ -161,10 +254,16 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... AutoAim_uninstall"
+	@echo "... uninstall"
+	@echo "... Calibration"
+	@echo "... Capture"
+	@echo "... Communication"
+	@echo "... Filter"
+	@echo "... Pose"
+	@echo "... Settings"
 	@echo "... auto_aim"
-	@echo "... src/Main.o"
-	@echo "... src/Main.i"
-	@echo "... src/Main.s"
+	@echo "... test"
 .PHONY : help
 
 
