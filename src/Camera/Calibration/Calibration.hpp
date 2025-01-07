@@ -44,11 +44,17 @@ class MonocularCalibrator {
     /* ========== Util Functions ========== */
     /**
      * @brief 提取角点
-     * 
-     * @return true 
-     * @return false 
+     *
+     * @return true
+     * @return false
      */
     bool ExtractCorners();
+    /**
+     * @brief 标定单目相机
+     *
+     * @param camParams
+     */
+    void Calibrate(MonocularCameraParameters &camParams);
 
   public:
     MonocularCalibrator() = default;
@@ -59,14 +65,29 @@ class MonocularCalibrator {
 
     /**
      * @brief 设置标定板参数
-     * 
-     * @param numCornerRow 
-     * @param numCornerCol 
-     * @param cellWidth 
-     * @param cellHeight 
+     *
+     * @param numCornerRow
+     * @param numCornerCol
+     * @param cellWidth
+     * @param cellHeight
      */
     void SetChessboardParams(int numCornerRow, int numCornerCol,
                              int cellWidth, int cellHeight);
+
+    /**
+     * @brief 计算单目相机标定精度
+     *
+     * @param camParams
+     */
+    void EvaluateMonocularCalibrationResults(
+        const MonocularCameraParameters &camParams);
+
+    void WriteResultToFile(const std::string &camId,
+                           const MonocularCameraParameters &camParams,
+                           bool saveImages);
+
+    const std::vector<std::vector<cv::Point3f>> &ObjectPoints();
+    const std::vector<std::vector<cv::Point2f>> &ImagesCorners();
 };
 
 #endif
