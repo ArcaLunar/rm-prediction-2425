@@ -15,4 +15,11 @@
 // true = 打印调试信息
 #define DEBUG true
 
+/**
+ * @brief 相机标定相关常量
+ * 
+ */
+constexpr int kImageWidth = 1440;  // 图像宽度
+constexpr int kImageHeight = 1080;  // 图像高度
+
 #endif

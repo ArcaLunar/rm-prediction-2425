@@ -9,8 +9,8 @@
  *
  */
 
-#ifndef __UNSCEMTED_KALMAN_FILTER_HPP__
-#define __UNSCEMTED_KALMAN_FILTER_HPP__
+#ifndef __UNSCENTED_KALMAN_FILTER_HPP__
+#define __UNSCENTED_KALMAN_FILTER_HPP__
 
 #include <Eigen/Core>
 

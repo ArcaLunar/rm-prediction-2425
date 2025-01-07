@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.20)
-# 项目名称
+#######################
+#      项目名称        #
+#######################
 project(auto_aim)
 
-# 设置 C++ 版本
+#######################
+#    设置 C++ 版本     #
+#######################
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_C_COMPILER gcc)
@@ -10,12 +14,19 @@ set(CMAKE_C_COMPILER gcc)
 # 主程序
 add_executable(auto_aim src/Main.cpp)
 
-# 寻找依赖
+#######################
+#       寻找依赖       #
+#######################
 find_package(spdlog REQUIRED)
+# Also used: https://github.com/fishros/transforms3d_cpp
+# 需要
 
-# 添加依赖
+#######################
+#       添加依赖       #
+#######################
 target_link_libraries(auto_aim
-    spdlog::spdlog # apt 安装的预编译的 spdlog 库, 见 https://github.com/gabime/spdlog/blob/v1.x/example/CMakeLists.txt
+    # apt 安装的预编译的 spdlog 库, 见 https://github.com/gabime/spdlog/blob/v1.x/example/CMakeLists.txt
+    spdlog::spdlog
 )
 
 # 设置输出路径
