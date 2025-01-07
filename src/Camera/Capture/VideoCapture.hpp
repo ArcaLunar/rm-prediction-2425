@@ -1,9 +1,27 @@
+/**
+ * @file VideoCapture.hpp
+ * @author arca@connect.hku.hk
+ * @brief 相机采集模块
+ * @version 0.1
+ * @date 2025-01-07
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
+
 #ifndef __VIDEO_CAPTURE_HPP__
 #define __VIDEO_CAPTURE_HPP__
 
-/**
- * @brief 视频、图像采集。
- * 
- */
+#include "MvCameraControl.h"
+#include <filesystem>
+
+enum class CameraType {
+    HikCamera,
+    Webcam,
+    ImageFolder,
+    Video
+};
+
+class FrameCapture {};
 
 #endif

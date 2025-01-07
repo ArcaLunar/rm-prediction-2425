@@ -9,26 +9,10 @@ project(auto_aim)
 #######################
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-# set(CMAKE_CXX_COMPILER g++)
-# set(CMAKE_C_COMPILER gcc)
 
-# 主程序
-# add_executable(auto_aim src/Main.cpp)
+
 add_subdirectory(src)
-#######################
-#       寻找依赖       #
-#######################
-# find_package(spdlog REQUIRED)
-# Also used: https://github.com/fishros/transforms3d_cpp
-# 需要
 
-#######################
-#       添加依赖       #
-#######################
-# target_link_libraries(auto_aim
-#     
-#     spdlog::spdlog
-# )
 
 # 设置输出路径
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
