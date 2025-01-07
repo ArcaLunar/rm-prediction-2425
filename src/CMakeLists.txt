@@ -26,6 +26,9 @@ target_link_libraries(auto_aim
     Filter
     Pose
     Settings
+
+    # apt 安装的预编译的 spdlog 库
+    # 见 https://github.com/gabime/spdlog/blob/v1.x/example/CMakeLists.txt
     spdlog::spdlog
 )
 
