@@ -1,0 +1,2 @@
+/usr/bin/ar qc libKF.a CMakeFiles/KF.dir/KalmanFilter.cpp.o
+/usr/bin/ranlib libKF.a

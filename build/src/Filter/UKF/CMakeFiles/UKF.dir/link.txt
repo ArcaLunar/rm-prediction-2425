@@ -1,0 +1,2 @@
+/usr/bin/ar qc libUKF.a CMakeFiles/UKF.dir/UnscentedKalmanFilter.cpp.o
+/usr/bin/ranlib libUKF.a

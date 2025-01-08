@@ -1,0 +1,2 @@
+/usr/bin/ar qc libFilter.a 
+/usr/bin/ranlib libFilter.a

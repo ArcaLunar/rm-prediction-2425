@@ -1,0 +1,2 @@
+/usr/bin/ar qc libAbstractFilter.a CMakeFiles/AbstractFilter.dir/AbstractFilter.cpp.o
+/usr/bin/ranlib libAbstractFilter.a
