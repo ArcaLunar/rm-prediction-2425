@@ -20,8 +20,16 @@
 class CaptureInterface {
   public:
     virtual void ReadFrame();
+    void LoadConfig();
+    void SetFrameSize();
 };
 
-class FrameCapture : CaptureInterface {};
+class HikCam : CaptureInterface {};
+
+class WebCan : CaptureInterface {};
+
+class VideoFile : CaptureInterface {};
+
+class ImgFolder : CaptureInterface {};
 
 #endif
