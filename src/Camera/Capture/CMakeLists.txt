@@ -34,6 +34,7 @@ target_link_libraries(Capture
     MediaProcess
     X11
     spdlog::spdlog
+    Settings
 )
 
 target_include_directories(Capture PUBLIC

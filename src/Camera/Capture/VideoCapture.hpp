@@ -12,11 +12,10 @@
 #ifndef __VIDEO_CAPTURE_HPP__
 #define __VIDEO_CAPTURE_HPP__
 
+#include "Config.hpp"
 #include "MvCameraControl.h"
 #include <filesystem>
 #include <spdlog/spdlog.h>
-
-enum class CameraType { HikCamera, Webcam, ImageFolder, Video };
 
 class CaptureInterface {
   public:
