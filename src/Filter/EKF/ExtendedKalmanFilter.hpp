@@ -1,6 +1,0 @@
-#ifndef __EXTENDED_KALMAN_FILTER_HPP__
-#define __EXTENDED_KALMAN_FILTER_HPP__
-
-class EKF {};
-
-#endif // __EXTENDED_KALMAN_FILTER_HPP__

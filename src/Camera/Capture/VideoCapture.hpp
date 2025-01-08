@@ -14,14 +14,15 @@
 
 #include "MvCameraControl.h"
 #include <filesystem>
+#include <spdlog/spdlog.h>
 
-enum class CameraType {
-    HikCamera,
-    Webcam,
-    ImageFolder,
-    Video
+enum class CameraType { HikCamera, Webcam, ImageFolder, Video };
+
+class CaptureInterface {
+  public:
+    virtual void ReadFrame();
 };
 
-class FrameCapture {};
+class FrameCapture : CaptureInterface {};
 
 #endif
