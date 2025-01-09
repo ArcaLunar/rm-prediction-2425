@@ -80,6 +80,7 @@ class HikCamera : CapturerBase {
   public:
     HikCamera();
     ~HikCamera();
+    void *GetHandle() { return m_handle; }
     static cv::Mat ConvertRawToMat(MV_FRAME_OUT_INFO_EX *, MV_FRAME_OUT *);
     void TestFunctionality();
 };
