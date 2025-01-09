@@ -5,7 +5,7 @@
 #include <string>
 #include <unistd.h>
 
-std::string SavDir = "../calib_imgs";
+std::string SavDir = "../calib_imgs/";
 
 std::atomic_bool eflag{false};
 std::atomic_int cnt{0};
@@ -15,7 +15,8 @@ void *ework(void *pUser) {
     MV_FRAME_OUT stImageInfo = {0};
     memset(&stImageInfo, 0, sizeof(MV_FRAME_OUT));
     while (1) {
-        if (eflag || cnt >= 50) break;
+        if (cnt >= 50) eflag = true;
+        if (eflag) break;
         nRet = MV_CC_GetImageBuffer(pUser, &stImageInfo, 1000);
 
         if (nRet != MV_OK) {
@@ -57,10 +58,10 @@ int main() {
     };
 
     pthread_t pid;
-    int result = pthread_create(&pid, NULL, ework, cam.m_handle);
+    int result = pthread_create(&pid, NULL, ework, cam.GetHandle());
     if (result != 0) {
         spdlog::info("thread create failed");
-        return;
+        return 0;
     }
     press();
 }

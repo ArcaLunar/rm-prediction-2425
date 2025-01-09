@@ -28,6 +28,8 @@ link_directories(
     ${OpenCV_LIB_DIR}
 )
 
+add_executable(calib_img GetCalibImgs.cpp)
+
 # 相机标定程序
 add_executable(cam CalibrationMain.cpp)
 
@@ -36,6 +38,17 @@ add_executable(auto_aim Main.cpp)
 
 # 添加测试程序
 add_executable(test Test.cpp)
+
+target_link_libraries(calib_img
+    Camera
+    MvCameraControl
+    MVGigEVisionSDK
+    MVRender
+    MvUsb3vTL
+    MediaProcess
+    X11
+    spdlog::spdlog
+)
 
 # 链接所有库
 target_link_libraries(cam
