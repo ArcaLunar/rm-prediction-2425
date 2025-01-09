@@ -1,2 +1,0 @@
-/usr/bin/ar qc libSettings.a CMakeFiles/Settings.dir/Config.cpp.o
-/usr/bin/ranlib libSettings.a

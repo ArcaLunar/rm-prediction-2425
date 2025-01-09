@@ -7,9 +7,8 @@ project(auto_aim)
 #######################
 #    设置 C++ 版本     #
 #######################
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 
 add_subdirectory(src)
 

@@ -4,7 +4,12 @@ project(Capture)
 
 # 查找 OpenCV 库
 find_package(OpenCV REQUIRED)
-find_package(spdlog REQUIRED)
+# find_package(spdlog REQUIRED)
+
+set(CMAKE_CXX_STANDARD 17)
+set(MvsIncludeDir /opt/MVS/include)
+set(MvsLib /opt/MVS/lib/64)
+set(SPDLOG_FMT_EXTERNAL OFF)
 
 # 设置 MVS 头文件路径
 include_directories(
@@ -13,7 +18,7 @@ include_directories(
 )
 # 设置 MVS 库文件路径
 link_directories(
-    /opt/MVS/lib/64
+    ${MvsLib}`
     ${OpenCV_LIB_DIR}
 )
 
@@ -22,10 +27,10 @@ set(CAPTURE_SRC VideoCapture.cpp)
 set(CAPTURE_HEADERS VideoCapture.hpp)
 
 # 添加库
-add_library(Capture ${CAPTURE_SRC} ${CAPTURE_HEADERS})
+add_library(Capture ${CAPTURE_SRC} ${CAPTURE_HEADERS} ${MvsIncludeDir})
 
 # 链接 OpenCV 库
-target_link_libraries(Capture
+target_link_libraries(Capture PUBLIC
     ${OpenCV_LIBS}
     MvCameraControl
     MVGigEVisionSDK
@@ -33,7 +38,7 @@ target_link_libraries(Capture
     MvUsb3vTL
     MediaProcess
     X11
-    spdlog::spdlog
+    # spdlog::spdlog
     Settings
 )
 

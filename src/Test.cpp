@@ -1,4 +1,7 @@
-#include <tf2/tf2/LinearMath/Quaternion.h>
-#include "UnscentedKalmanFilter.hpp"
+#include "VideoCapture.hpp"
 
-int main() {}
+int main() {
+    Camera::HikCamera camera;
+    
+    return 0;
+}

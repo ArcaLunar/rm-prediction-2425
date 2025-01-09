@@ -1,9 +1,6 @@
 # src/CMakeLists.txt
 cmake_minimum_required(VERSION 3.10)
-project(AutoAim)
-
-# 设置编译选项
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+project(AutoAim CXX)
 
 # 添加子目录
 add_subdirectory(Camera)
@@ -58,7 +55,6 @@ target_link_libraries(auto_aim
     Filter
     Pose
     Settings
-
     # apt 安装的预编译的 spdlog 库
     # 见 https://github.com/gabime/spdlog/blob/v1.x/example/CMakeLists.txt
     spdlog::spdlog

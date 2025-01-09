@@ -1,2 +1,0 @@
-/usr/bin/ar qc libCalibration.a CMakeFiles/Calibration.dir/Calibration.cpp.o
-/usr/bin/ranlib libCalibration.a
