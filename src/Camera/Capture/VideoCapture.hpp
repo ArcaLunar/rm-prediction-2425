@@ -13,6 +13,8 @@
 #define __VIDEO_CAPTURE_HPP__
 
 #include "CameraParams.h"
+#include "Config.hpp"
+#include <opencv2/opencv.hpp>
 
 namespace Camera {
 
@@ -60,21 +62,25 @@ class HikCamera : CapturerBase {
     void __OpenCamera();
 
     /// \brief 设置一系列参数配置
+    void __LoadConfig();
     void __Setup();
 
     /// \brief 初始化图像捕获
     void __InitRetrieveImage();
+
+    /// \brief 转换为 OpenCV 矩阵
 
   protected:
     /// \brief 设备列表
     MV_CC_DEVICE_INFO_LIST m_devicelist;
     unsigned int camIndex;
     void *m_handle;
+    Camera::CameraConfig m_config;
 
   public:
     HikCamera();
     ~HikCamera();
-
+    static cv::Mat ConvertRawToMat(MV_FRAME_OUT_INFO_EX *, MV_FRAME_OUT *);
     void TestFunctionality();
 };
 

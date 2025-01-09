@@ -1,15 +1,23 @@
 #include "VideoCapture.hpp"
 #include "CameraParams.h"
 #include "MvCameraControl.h"
+#include "PixelType.h"
 // #include "MvObsoleteInterfaces.h"
 #include <atomic>
+#include <cstddef>
 #include <cstdio>
+#include <opencv2/core/persistence.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/imgproc.hpp>
 #include <pthread.h>
 #include <spdlog/spdlog.h>
 
 #include <cstring>
 #include <string>
 #include <unistd.h>
+
+constexpr char ConfigFilePath[] = "../../config/camera_config.json";
 
 Camera::HikCamera::HikCamera() {
     // 初始化 SDK
@@ -33,32 +41,23 @@ Camera::HikCamera::~HikCamera() {
     // 停止捕获图像
     spdlog::info("stop retrieving image");
     int result = MV_CC_StopGrabbing(this->m_handle);
-    if (result != MV_OK) {
-        spdlog::critical("error stopping");
-        // exit(-1);
-    }
+    if (result != MV_OK) spdlog::critical("error stopping");
     spdlog::info("stop succeed");
 
     // 关闭相机
     spdlog::info("closing camera");
     result = MV_CC_CloseDevice(this->m_handle);
-    if (result != MV_OK) {
-        spdlog::critical("error closing");
-        // exit(-1);
-    }
+    if (result != MV_OK) spdlog::critical("error closing");
     spdlog::info("close succeed");
 
+    // 销毁句柄
     spdlog::info("destroying handle");
     result = MV_CC_DestroyHandle(this->m_handle);
-    if (result != MV_OK) {
-        spdlog::critical("error destroying");
-        // exit(-1);
-    }
+    if (result != MV_OK) spdlog::critical("error destroying");
     spdlog::info("destroy succeed");
 
     // 释放 SDK
     MV_CC_Finalize();
-
     spdlog::info("exit successfully");
 }
 
@@ -131,20 +130,69 @@ void Camera::HikCamera::__OpenCamera() {
     spdlog::info("open succeed");
 }
 
+cv::Mat Camera::HikCamera::ConvertRawToMat(
+    MV_FRAME_OUT_INFO_EX *pstImageInfo, MV_FRAME_OUT *pstImage
+) {
+    cv::Mat result;
+    auto mark = pstImageInfo->enPixelType;
+    decltype(CV_8UC1) channel_type;
+    decltype(cv::COLOR_BayerGB2RGB) transform_type;
+
+    if (mark == PixelType_Gvsp_BayerGB8) {
+        channel_type   = CV_8UC1;
+        transform_type = cv::COLOR_BayerRG2RGB;
+    } else if (mark == PixelType_Gvsp_BGR8_Packed) {
+        channel_type   = CV_8UC3;
+        transform_type = cv::COLOR_BGR2GRAY;
+    } else if (mark == PixelType_Gvsp_BayerGB8) {
+        channel_type   = CV_8UC1;
+        transform_type = cv::COLOR_BayerGB2RGB;
+    } else spdlog::error("unsupported pixel format");
+
+    cv::Mat src(
+        pstImageInfo->nHeight,
+        pstImageInfo->nWidth,
+        channel_type,
+        pstImage->pBufAddr
+    );
+    if (transform_type == cv::COLOR_BGR2GRAY) result = src;
+    else cv::cvtColor(src, result, transform_type);
+
+    return result;
+}
+
+void Camera::HikCamera::__LoadConfig() {
+    // ! 打开配置文件
+    cv::FileStorage fs(ConfigFilePath, cv::FileStorage::READ);
+    spdlog::info("reading from .config");
+
+    fs["width"] >> this->m_config.Width;
+    fs["height"] >> this->m_config.Height;
+    spdlog::info(
+        "reading from config: W={}, H={}",
+        this->m_config.Width,
+        this->m_config.Height
+    );
+
+    fs["TriggerMode"] >> this->m_config.TriggerMode;
+    fs["AcquisitionFrameRateEnable"] >>
+        this->m_config.AcquisitionFrameRateEnable;
+}
+
 void Camera::HikCamera::__Setup() {
+    __LoadConfig();
+
     // 辅助匿名函数
     auto SetAttr = [&](std::string attr, auto val) {
         spdlog::info("setting camera, {} -> {}", attr, val);
         int result = MV_CC_SetEnumValue(this->m_handle, attr.c_str(), val);
-        if (result != MV_OK) {
+        if (result != MV_OK)
             spdlog::critical("setting {} to {} failed", attr, val);
-            exit(-1);
-        }
         spdlog::info("setting {} to {} succeeded.", attr, val);
     };
 
     // Trigger mode 设置为 off
-    SetAttr("TriggerMode", 0);
+    SetAttr("TriggerMode", this->m_config.TriggerMode);
 }
 
 void Camera::HikCamera::__InitRetrieveImage() {
@@ -158,7 +206,7 @@ void Camera::HikCamera::__InitRetrieveImage() {
 }
 
 /////////////////////////////////////////
-// * 以下为测试用代码
+// !! 以下为测试用代码
 
 std::atomic_bool flag{false};
 void *work(void *pUser) {
@@ -168,17 +216,31 @@ void *work(void *pUser) {
     while (1) {
         if (flag) break;
         nRet = MV_CC_GetImageBuffer(pUser, &stImageInfo, 1000);
-        if (nRet == MV_OK) {
-            spdlog::info(
-                "get one frame, w={} h={} #frame={}",
-                stImageInfo.stFrameInfo.nExtendWidth,
-                stImageInfo.stFrameInfo.nExtendHeight,
-                stImageInfo.stFrameInfo.nFrameNum
-            );
-            MV_CC_FreeImageBuffer(pUser, &stImageInfo);
-        } else {
+
+        if (nRet != MV_OK) {
             spdlog::warn("No data.");
+            continue;
         }
+
+        spdlog::info(
+            "get one frame, w={} h={} #frame={}",
+            stImageInfo.stFrameInfo.nExtendWidth,
+            stImageInfo.stFrameInfo.nExtendHeight,
+            stImageInfo.stFrameInfo.nFrameNum
+        );
+        auto img = Camera::HikCamera::ConvertRawToMat(
+            &stImageInfo.stFrameInfo, &stImageInfo
+        );
+        if (img.empty()) spdlog::warn("Empty image.");
+        else {
+            spdlog::info("captured");
+            // cv::imshow("image", img);
+            cv::imwrite("test.jpg", img);
+        }
+
+        MV_CC_FreeImageBuffer(pUser, &stImageInfo);
+
+        sleep(1);
     }
 
     return 0;
@@ -186,12 +248,9 @@ void *work(void *pUser) {
 
 void Camera::HikCamera::TestFunctionality() {
     auto press = [&]() {
-        int c;
-        while ((c = getchar()) != '\n' && c != EOF);
-        spdlog::debug("Press enter to exit");
         while (getchar() != '\n');
+        spdlog::debug("Enter is pressed, exiting");
         flag = true;
-        // sleep(1);
     };
 
     pthread_t pid;

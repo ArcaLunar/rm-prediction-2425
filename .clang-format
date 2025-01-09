@@ -19,6 +19,7 @@ AllowShortFunctionsOnASingleLine: All
 AllowShortCaseLabelsOnASingleLine: true
 AllowShortBlocksOnASingleLine: Always
 PackConstructorInitializers: NextLine
+IndentCaseLabels: true
 
 ColumnLimit: 75
 AlwaysBreakTemplateDeclarations: true

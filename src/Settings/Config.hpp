@@ -22,16 +22,37 @@ enum class AimingMode {
 
 };
 
-enum class ImageSource { HikCamera, WebCam, ImageFolder, Video };
-
 /**
  * @brief
  *
  */
-struct ImageConfig {
-    ImageSource srcType;
-    std::string pathToImageSrc;
+namespace Camera {
 
+struct CameraConfig {
+    bool AcquisitionFrameRateEnable;
+    int AcquisitionFrameRate;
+
+    int Width, Height;
+    double exposure_time;
+
+    bool adjustable_gamma;
+    int gamma;
+
+    int gain_auto;
+
+    bool adjustable_saturation;
+    int saturation;
+
+    int offset_x, offset_y;
+
+    int TriggerMode;
+    int TriggerSource;
+    int line_selector;
+    int PayloadSize;
+};
+
+}; // namespace Camera
+struct ImageConfig {
     int frameWidth, frameHeight;
 
     cv::Mat cameraMatrix; // 相机内参矩阵
