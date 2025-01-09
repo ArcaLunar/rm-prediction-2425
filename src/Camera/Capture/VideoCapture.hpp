@@ -56,6 +56,10 @@ class HikCamera : CapturerBase {
     /// \brief 创建用于获取图像的句柄
     void __CreateHandle();
 
+    void __OpenCamera();
+
+    void __LoadConfig();
+
     void __RetrieveImage();
 
   protected:
@@ -71,3 +75,20 @@ class HikCamera : CapturerBase {
 }; // namespace Camera
 
 #endif
+
+//********** Appendix: 图像格式 **********/
+// 0x01100003:Mono10
+// 0x010C0004:Mono10Packed
+// 0x01100005:Mono12
+// 0x010C0006:Mono12Packed
+// 0x01100007:Mono16
+// 0x02180014:RGB8Packed
+// 0x02100032:YUV422_8
+// 0x0210001F:YUV422_8_UYVY
+// 0x01080008:BayerGR8
+// 0x01080009:BayerRG8
+// 0x0108000A:BayerGB8
+// 0x0108000B:BayerBG8
+// 0x0110000e:BayerGB10
+// 0x01100012:BayerGB12
+// 0x010C002C:BayerGB12Packed
