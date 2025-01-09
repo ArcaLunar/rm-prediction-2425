@@ -56,20 +56,25 @@ class HikCamera : CapturerBase {
     /// \brief 创建用于获取图像的句柄
     void __CreateHandle();
 
+    /// \brief 打开相机
     void __OpenCamera();
 
-    void __LoadConfig();
+    /// \brief 设置一系列参数配置
+    void __Setup();
 
-    void __RetrieveImage();
+    void __InitRetrieveImage();
 
   protected:
     /// \brief 设备列表
     MV_CC_DEVICE_INFO_LIST m_devicelist;
     unsigned int camIndex;
-    void *handle;
+    void *m_handle;
 
   public:
     HikCamera();
+    ~HikCamera();
+
+    void TestFunctionality();
 };
 
 }; // namespace Camera
