@@ -62,6 +62,7 @@ class HikCamera : CapturerBase {
     /// \brief 设置一系列参数配置
     void __Setup();
 
+    /// \brief 初始化图像捕获
     void __InitRetrieveImage();
 
   protected:

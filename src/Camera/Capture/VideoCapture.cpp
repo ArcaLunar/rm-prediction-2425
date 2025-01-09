@@ -12,13 +12,19 @@
 #include <unistd.h>
 
 Camera::HikCamera::HikCamera() {
+    // 初始化 SDK
     MV_CC_Initialize();
     // 枚举设备
     this->__EnumDevices();
     // 输出设备信息
     this->__DebugDevices();
+    // 创建句柄
     this->__CreateHandle();
+    // 打开相机
     this->__OpenCamera();
+    // 设置相机参数
+    this->__Setup();
+    // 初始化图像捕获，准备捕获图像
     this->__InitRetrieveImage();
 }
 
