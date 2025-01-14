@@ -5,7 +5,7 @@ project(AutoAim CXX)
 # 添加子目录
 add_subdirectory(Camera)
 add_subdirectory(Communication)
-add_subdirectory(Filter)
+add_subdirectory(Tracker)
 add_subdirectory(Pose)
 add_subdirectory(Settings)
 
@@ -35,9 +35,6 @@ add_executable(cam CalibrationMain.cpp)
 
 # 添加主程序
 add_executable(auto_aim Main.cpp)
-
-# 添加测试程序
-add_executable(test Test.cpp)
 
 target_link_libraries(calib_img
     Camera
@@ -71,14 +68,4 @@ target_link_libraries(auto_aim
     # apt 安装的预编译的 spdlog 库
     # 见 https://github.com/gabime/spdlog/blob/v1.x/example/CMakeLists.txt
     spdlog::spdlog
-)
-
-target_link_libraries(test
-    Camera
-    Communication
-    Filter
-    Pose
-    Settings
-    spdlog::spdlog
-    tf2::tf2
 )
