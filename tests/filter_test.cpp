@@ -1,7 +1,3 @@
-#include "LinearizedMeasurementModel.hpp"
-#include <iostream>
+#include "KF.hpp"
 
-int main() {
-    std::cout << "Trying: Running test" << '\n';
-    return 0;
-}
+int main() {}
